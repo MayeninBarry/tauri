@@ -25,12 +25,20 @@ stages:
     steps:
     - bash: echo "Testing complete"
 
-  - job: Deploy
+  - job: PublishBuild
     timeoutInMinutes: 4
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - bash: echo "Publishing complete"   # Deploy to Test
+    - bash: echo "Publishing to my artifactory"   # Publishing to artifactory
 
-
+- stage: QA
+  displayName: "Prod envi"
+  jobs:
+  - job: Deploy
+    timeoutInMinutes: 6
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Deployed to Prod Envi"   #App deployed to prod
 
