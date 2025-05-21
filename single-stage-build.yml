@@ -32,13 +32,32 @@ stages:
     steps:
     - bash: echo "Publishing to my artifactory"   # Publishing to artifactory
 
-- stage: QA
-  displayName: "Prod envi"
+- stage: QA_Envi
+  displayName: "Deployed Prod QA Envi"
   jobs:
   - job: Deploy
     timeoutInMinutes: 6
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - bash: echo "Deployed to Prod Envi"   #App deployed to prod
+    - bash: echo "Deployed to QA"   #App deployed to QA envi
 
+- stage: Stage_Envi
+  displayName: "Deployed to stage Envi"
+  jobs:
+  - job: Deploy
+    timeoutInMinutes: 4
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Deployed to stage"   #App deployed to stage envi
+
+- stage: Prod_Envi
+  displayName: " Deployed Prod Envi"
+  jobs:
+  - job: Deploy
+    timeoutInMinutes: 5
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Deployed to Prod"   #App deployed to Prod envi
