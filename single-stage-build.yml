@@ -1,0 +1,36 @@
+# Starter pipeline
+# https://aka.ms/yaml
+
+trigger:
+- dev
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: CI
+  displayName: "Build, Test, and Publish"
+  jobs:
+  - job: Build
+    timeoutInMinutes: 4
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Build complete"   # Test build for success 
+    
+  - job: Test
+    timeoutInMinutes: 5
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Testing complete"
+
+  - job: Deploy
+    timeoutInMinutes: 4
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Publishing complete"   # Deploy to Test
+
+
+
