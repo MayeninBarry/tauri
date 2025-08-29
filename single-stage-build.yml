@@ -1,0 +1,44 @@
+# Starter pipeline
+# https://aka.ms/yaml
+
+trigger:
+- dev
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: CI
+  displayName: "Build, Test, and Publish"
+  jobs:
+  - job: Build
+    timeoutInMinutes: 4
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Build complete"   # Test build for success 
+    
+  - job: Test
+    timeoutInMinutes: 5
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Testing complete"
+
+  - job: PublishBuild
+    timeoutInMinutes: 4
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Publishing to my artifactory"   # Publishing to artifactory
+
+- stage: QA
+  displayName: "Prod envi"
+  jobs:
+  - job: Deploy
+    timeoutInMinutes: 6
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - bash: echo "Deployed to Prod Envi"   #App deployed to prod
+
